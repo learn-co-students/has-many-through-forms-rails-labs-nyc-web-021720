@@ -1,1 +1,22 @@
 
+<%= form_for @post do |fb| %>
+    <%= fb.label :title %>
+    <%= fb.text_field :title %>
+    <br />
+
+    <%= fb.label :content %>
+    <%= fb.text_area :content %>
+
+    <br />
+    <%= fb.collection_check_boxes :category_ids, Category.all, :id, :name %>
+
+    <br />
+    <%= fb.fields_for :categories, @post.categories.build do |cat_form| %>
+        <%= cat_form.label :name, "Category" %>
+        <%= cat_form.text_field :name %>
+    <% end %>
+
+    <br />
+    <br />
+    <%= fb.submit "Create Post" %>
+<% end %>
